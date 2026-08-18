@@ -106,3 +106,49 @@ Es gibt zwei Textvarianten, die in der Quelle unterschiedlich positioniert sind:
 ```
 python3 de/translate_reisetaschen_de.py <spanischer-export.csv> de/reisetaschen_export_DE.csv
 ```
+
+---
+
+# Deutsche Kollektionen – Lampen und Tassen
+
+Diese drei Exporte enthalten – anders als die Körbe, Tischläufer und Taschen –
+**pro Produkt eine eigene Beschreibung**. Sie sind einzeln übersetzt, nicht über
+eine gemeinsame Vorlage erzeugt. Eingebettete `<img>`-Tags übernehmen die Skripte
+unverändert in Reihenfolge aus der Quelle (Platzhalter `{IMG1}`, `{IMG2}` …), damit
+keine Bild-URL von Hand abgeschrieben wird.
+
+## `lampen_schmetterling_export_DE.csv` (6 Produkte, Tag PR3760)
+`translate_lampen_pr3760_de.py`. Titel, Beschreibung und `Type`
+(„Handmade Butterfly Lamps“ → „Handgefertigte Schmetterlingslampen“) übersetzt.
+Preise 94.95 → 99.95, Compare At 198.95 → 203.95.
+
+## `lampen_deko_export_DE.csv` (7 Produkte, 14 Zeilen, Tag PR3759)
+`translate_lampen_pr3759_de.py`. Preise 34.95 → 39.95 / 39.95 → 44.95,
+Compare At 98.97 → 103.97.
+
+## `tassen_export_DE.csv` (10 Produkte, 28 Zeilen, Tag NM0053)
+`translate_tassen_de.py`. Zusätzlich übersetzt: Optionsnamen „Estilo“ → „Stil“,
+„Oferta“ → „Angebot“; Optionswerte „1x Taza“ → „1x Tasse“, „Ágata“ → „Achat“,
+„Rojo volcánico“ → „Vulkanrot“, „Amatista“ → „Amethyst“.
+Preise 24.95–69.95 → 29.95–74.95, Compare At 99.95–299.95 → 104.95–304.95.
+
+### Offene Punkte in der Quelle (nicht stillschweigend geändert)
+- **„Menos azul“ / „Menos verde“** (Farbvarianten der Mineralkristall-Tassen) sind
+  schon im Spanischen unklar; wörtlich als „Weniger Blau“ / „Weniger Grün“ übersetzt.
+  Sobald die echten Farbnamen bekannt sind, in `OPTION_VALUES_DE` anpassen.
+- **Fremde Markennamen** im Fließtext der Quelle („Solymall Book Mug“, „Clara San
+  Diego“) wurden in der deutschen Fassung durch neutrale Formulierungen ersetzt.
+- **Rabattzeile „70 % sparen“** ist übernommen, stimmt aber nicht für jedes Produkt.
+- Zwei Beschreibungen betten Bilder von **fremden Domains** ein
+  (`ivy-cambridge.co.uk`, `ucarecdn.com`, `d1y4tm6t3pzfj.cloudfront.net`).
+
+## Bereits erledigt
+`products_export_1_17.csv` ist byte-identisch mit dem ersten Export
+(`products_export_1_16.csv`) – die deutsche Fassung ist `products_export_DE.csv`.
+
+## Erneut ausführen
+```
+python3 de/translate_lampen_pr3760_de.py <export.csv> de/lampen_schmetterling_export_DE.csv
+python3 de/translate_lampen_pr3759_de.py <export.csv> de/lampen_deko_export_DE.csv
+python3 de/translate_tassen_de.py        <export.csv> de/tassen_export_DE.csv
+```
