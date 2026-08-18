@@ -152,3 +152,45 @@ python3 de/translate_lampen_pr3760_de.py <export.csv> de/lampen_schmetterling_ex
 python3 de/translate_lampen_pr3759_de.py <export.csv> de/lampen_deko_export_DE.csv
 python3 de/translate_tassen_de.py        <export.csv> de/tassen_export_DE.csv
 ```
+
+---
+
+# Audit des Gesamtkatalogs (products_export_1_22.csv, 610 Produkte)
+
+Sprachprüfung des vollständigen Shop-Exports: **413 Produkte auf Deutsch (68 %),
+197 auf Spanisch (32 %)**. Die spanischen zerfallen in zwei getrennte Fälle:
+
+## 1. `AUDIT_duplicados_ES_a_apagar.csv` – 147 Duplikate
+Beim Import der deutschen Dateien hat Shopify wegen der neuen Handles **neue
+Produkte angelegt statt der bestehenden zu aktualisieren**. Die spanischen
+Originale sind also weiterhin im Shop, parallel zu den deutschen Fassungen:
+
+| Kollektion | ES-Originale noch im Shop | DE-Fassungen angelegt |
+|---|---|---|
+| Wäschekörbe | 35 | 35 |
+| Tischläufer | 39 | 39 |
+| Reisetaschen | 50 | 50 |
+| Schmetterlingslampen | 6 | 6 |
+| Deko-Lampen | 7 | 7 |
+| Tassen | 10 | 10 |
+| **Summe** | **147** | **147** |
+
+Die Datei listet Kollektion, ES-Handle und aktuellen Titel – Grundlage zum
+Löschen der Duplikate im Shopify-Admin.
+
+Alternative: die sechs DE-Dateien mit den **ursprünglichen spanischen Handles**
+neu erzeugen; dann aktualisiert ein Import die bestehenden Produkte, statt neue
+anzulegen (die bereits angelegten deutschen Produkte müssten dann gelöscht werden).
+
+## 2. `AUDIT_por_traduzir.csv` – 50 noch nicht übersetzte Produkte
+Diese Produkte waren in keinem der bisher gelieferten Exporte enthalten:
+
+| Gruppe | Anzahl |
+|---|---|
+| Reisetaschen (Jade, Tiffany, Oceane …) | 27 |
+| Tiffany-Lampen (Tag `LAMPS`: SOLELIA, AZURIA, SOLINA …) | 20 |
+| Schmetterlingslampe TIFFALIGHT | 1 |
+| Tischläufer „Menorah Iluminada“ | 1 |
+| Wäschekorb „Encanto de las Tierras Altas“ | 1 |
+
+Spalten: Handle, Titel, Type, Tags, Variant Price, Compare At Price.
