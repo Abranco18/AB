@@ -31,3 +31,37 @@
 ```
 python3 de/translate_de.py <spanischer-export.csv> de/products_export_DE.csv
 ```
+
+---
+
+# Deutsche Kollektion – Tischläufer (Emma Frankfurt)
+
+`tischlaeufer_export_DE.csv` ist die deutsche Fassung des zweiten spanischen Exports
+(39 Produkte, 124 Zeilen, je 3 Größen S/M/L), erzeugt mit `translate_tischlaeufer_de.py`.
+
+## Was übersetzt wurde
+- `Handle` – neue Slugs nach dem Schema `gesteppter-tischlaeufer-<motiv>`
+- `Title` – „Gesteppter Tischläufer - <Motiv>“, alle 39 Motivnamen übersetzt
+- `Body (HTML)` – identische HTML-Struktur (`<p>`, `<ul>`, `<li>`, `<br>`) wie im Original
+- `Tags` – „Mantelería“ → „Tischwäsche“
+- `Option1 Name` „Tamaño“ → „Größe“; Maßangaben unverändert, nur das Trennzeichen
+  zu „×“ vereinheitlicht (die Quelle mischte „x“ und „×“)
+
+## Was bewusst unverändert bleibt
+- `Vendor` (Emma Frankfurt), `Variant SKU`, Bild-URLs, Bestands- und Versandfelder
+- Der Lieferantenname „Jetiy“ in der Materialbeschreibung
+- Die L-Variante hat auch im Original keine SKU
+
+## Preise
+`Variant Price` und `Variant Compare At Price` je +5,00 €:
+
+| Größe | Preis alt → neu | Compare At alt → neu |
+|---|---|---|
+| S (36 × 122 cm) | 39.95 → 44.95 | 134.95 → 139.95 |
+| M (36 × 183 cm) | 44.95 → 49.95 | 149.95 → 154.95 |
+| L (36 × 275 cm) | 49.95 → 54.95 | 164.95 → 169.95 |
+
+## Erneut ausführen
+```
+python3 de/translate_tischlaeufer_de.py <spanischer-export.csv> de/tischlaeufer_export_DE.csv
+```
