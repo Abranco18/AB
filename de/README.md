@@ -194,3 +194,36 @@ Diese Produkte waren in keinem der bisher gelieferten Exporte enthalten:
 | Wäschekorb „Encanto de las Tierras Altas“ | 1 |
 
 Spalten: Handle, Titel, Type, Tags, Variant Price, Compare At Price.
+
+---
+
+# `restantes50_export_DE.csv` – die 50 fehlenden Produkte
+
+Erzeugt mit `translate_falta50_de.py` aus den 50 Produkten, die das Katalog-Audit
+noch auf Spanisch gefunden hat (131 Zeilen). Vier Gruppen:
+
+| Gruppe | Anzahl | Vorlage |
+|---|---|---|
+| Lampen (20x Tag `LAMPS` + TIFFALIGHT) | 21 | je einzeln übersetzt |
+| Reisetaschen (Jade, Tiffany, Oceane …) | 27 | wie `reisetaschen_export_DE.csv` |
+| Tischläufer „Leuchtende Menora“ | 1 | wie `tischlaeufer_export_DE.csv` |
+| Wäschekorb „Zauber der Highlands“ | 1 | wie `products_export_DE.csv` |
+
+Preise: `Variant Price` und `Variant Compare At Price` je +5,00 € (u. a.
+94.95 → 99.95 und 239.95 → 244.95 bei den Lampen).
+
+Der Wäschekorb hat zusätzlich `Option2` („Diseño“ → „Design“) mit fünf
+Designnamen, die ebenfalls übersetzt sind (Zauber der Highlands, Gemütliches
+Kälbchen, Highland-Blumen, Highland-Blüte, Highland-Abendrot).
+
+### Offene Punkte in der Quelle
+- **MOSAICRA** trägt im spanischen Text durchgehend die Beschreibung der Lampe
+  **Ivorya** („Ivorya Luxury Baroque Table“) – ein Copy-Paste-Fehler. Die deutsche
+  Fassung beschreibt die Mosaiklampe, nicht Ivorya.
+- Zwei Produkte heißen beide **AURELIA**; sie sind über Untertitel und Handle
+  unterschieden („Glaslampe im Alte-Welt-Stil“ / „Vintage-Tischlampe im Barockstil“).
+
+## Erneut ausführen
+```
+python3 de/translate_falta50_de.py <die-50-spanischen-zeilen.csv> de/restantes50_export_DE.csv
+```
