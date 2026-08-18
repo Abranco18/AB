@@ -65,3 +65,44 @@ python3 de/translate_de.py <spanischer-export.csv> de/products_export_DE.csv
 ```
 python3 de/translate_tischlaeufer_de.py <spanischer-export.csv> de/tischlaeufer_export_DE.csv
 ```
+
+---
+
+# Deutsche Kollektion – Reisetaschen (Emma Frankfurt)
+
+`reisetaschen_export_DE.csv` ist die deutsche Fassung des dritten spanischen Exports
+(50 Produkte, 95 Zeilen), erzeugt mit `translate_reisetaschen_de.py`.
+
+## Besonderheit
+Jede Beschreibung enthält ein eigenes eingebettetes Produktbild (`<img>`).
+Das Skript übernimmt pro Produkt genau dessen Bild-URL in den deutschen Text.
+Es gibt zwei Textvarianten, die in der Quelle unterschiedlich positioniert sind:
+- **Reise** (47 Produkte) – Wochenendtrip
+- **Alltag** (3 Produkte: Wilma, Fern, Veronica)
+
+## Was übersetzt wurde
+- `Handle` – `<name>-handgefertigte-weiche-reisetasche`, Vorname bleibt erhalten
+- `Title` – `<Name> | Handgefertigte weiche Reisetasche`
+- `Body (HTML)` – gleiche Struktur (`<h3>`, `<p>`, `<strong>`, ✔-Abschnitte);
+  `<meta charset>`- und `data-start`/`data-end`-Reste aus der Quelle entfernt
+- `Type` – „bag“/„Bags“ vereinheitlicht zu „Reisetasche“
+- `Option1 Name` „Tamaño“ → „Größe“; „Paisaje“ → „Querformat“, „W“ → „B“,
+  Dezimalkomma statt Punkt. Die Maßzahlen selbst sind unverändert.
+
+## Was bewusst unverändert bleibt
+- Die Vornamen der Produkte (Joan, Grace, …), auch die spanisch lokalisierten
+  (Ámbar, Jazmín, Fe, Adelaida, Clementina)
+- `Vendor`, Bild-URLs, Bestands- und Versandfelder; `Tags` sind in der Quelle leer
+
+## Preise
+`Variant Price` und `Variant Compare At Price` je +5,00 €:
+
+| Preis alt → neu | Compare At alt → neu |
+|---|---|
+| 39.95 → 44.95 | 134.99 → 139.99 |
+| 44.95 → 49.95 | 150.00 → 155.00 |
+
+## Erneut ausführen
+```
+python3 de/translate_reisetaschen_de.py <spanischer-export.csv> de/reisetaschen_export_DE.csv
+```
