@@ -363,3 +363,23 @@ und die deutschen auswählen.
    danach sind beide deutsch und nicht mehr unterscheidbar)
 2. `loja_final_DE.csv` importieren, „Overwrite existing products“ aktiviert
 3. Kontrolle: 660 Produkte − 197 = **463**
+
+---
+
+# `MARCAR_duplicados.csv` – Dubletten eindeutig markieren
+
+Sobald die Übersetzung importiert ist, tragen Original und Dublette denselben
+Titel und denselben Produkttyp. Unterscheidbar sind sie dann nur noch am
+Handle – und den zeigt die Produktliste im Admin nicht an.
+
+Diese Datei löst das: sie enthält **ausschließlich die 197 deutschen Handles**
+und stellt jedem Titel `ZZZLOESCHEN ` voran.
+
+## Ablauf
+1. `MARCAR_duplicados.csv` importieren, „Overwrite existing products“ aktiviert
+   → nur die 197 Dubletten werden umbenannt, kein Produkt wird angelegt
+2. In `Products` nach `ZZZLOESCHEN` suchen → alle auswählen → `Delete products`
+3. Kontrolle: die Suche nach `ZZZLOESCHEN` liefert 0 Treffer
+
+Geprüft: alle 197 Handles existieren bereits im Shop, kein einziger spanischer
+Handle ist enthalten. Die Originale werden nicht berührt.
