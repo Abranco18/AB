@@ -330,3 +330,36 @@ Werkzeug: `_spell.py`.
 - Bettwäsche trägt fünf verschiedene Produktbezeichnungen für dasselbe Set.
 - Abschnittstitel `REISEKOFFER`, obwohl dort Reisetaschen stehen.
 - Anrede uneinheitlich: Theme-Texte siezen, Produkttexte duzen.
+
+---
+
+# Dubletten löschen – Vorgehen im Admin
+
+Ein CSV-Import kann in Shopify **keine Produkte löschen**. Gelöscht wird
+ausschließlich im Admin unter `Products`. `APAGAR_duplicados_DE.csv` ist eine
+Referenzliste, keine Import-Datei.
+
+## 160 von 197 über Filter (kein Risiko)
+Geprüft: diese Filter treffen ausschließlich Dubletten, nie ein Original.
+
+| Filter | Treffer |
+|---|---|
+| Product type = `Reisetasche` | 77 |
+| Product type = `Gesteppter Wäschekorb` | 36 |
+| Product type = `Handgefertigte Schmetterlingslampen` | 7 |
+| Tag = `Tischwäsche` | 40 |
+
+Die Originale tragen `bag` / `Bags`, `Quilted Laundry Basket`,
+`Handmade Butterfly Lamps` bzw. den Tag `Mantelería` und bleiben unberührt.
+
+## 37 restliche: `APAGAR_restantes37.csv`
+Lampen und Tassen, bei denen Original und Dublette denselben Tag haben.
+Die Datei stellt beide Titel nebeneinander: deutscher Titel = löschen,
+spanischer Titel = behalten. Nach Tag filtern (`LAMPS`, `PR3759`, `NM0053`)
+und die deutschen auswählen.
+
+## Reihenfolge
+1. Dubletten löschen (jetzt, solange die Originale noch spanisch heißen –
+   danach sind beide deutsch und nicht mehr unterscheidbar)
+2. `loja_final_DE.csv` importieren, „Overwrite existing products“ aktiviert
+3. Kontrolle: 660 Produkte − 197 = **463**
