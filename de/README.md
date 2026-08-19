@@ -284,3 +284,49 @@ zeigte die Storefront weiterhin Spanisch.
 ```
 python3 de/build_loja_toda_DE.py <shop-export.csv> de/loja_toda_DE.csv
 ```
+
+---
+
+# `loja_final_DE.csv` – deutscher Text **und** auf 5 gerundete Rabatte
+
+Erzeugt mit `build_loja_final.py`. **Ersetzt `loja_toda_DE.csv`** – enthält
+dessen Übersetzungen und zusätzlich die gerundeten Rabatte.
+**380 Produkte / 1447 Zeilen**, ausschließlich bestehende Handles.
+
+## Rabatt-Rundung
+Der Badge im Theme rechnet `floor((compare − price) / compare × 100)`.
+Damit dort eine durch 5 teilbare Zahl steht, wird der **Vergleichspreis**
+angehoben; der Verkaufspreis bleibt unangetastet.
+Einerstelle 1–4 → 5, darüber → nächster Zehner (67 % → 70 %, 61 % → 65 %).
+
+| vorher | nachher |
+|---|---|
+| 51/52 % | 55 % |
+| 56/57/59 % | 60 % |
+| 61 % | 65 % |
+| 66/67/69 % | 70 % |
+| 71/72/73 % | 75 % |
+| 77/79 % | 80 % |
+
+Ergebnis: alle 1150 rabattierten Varianten zeigen 50/55/60/65/70/75/80 %.
+Geprüft gegen `loja_toda_DE.csv`: 631 Rabatte steigen, 129 bleiben gleich,
+**keiner sinkt**, kein Verkaufspreis ändert sich.
+
+> ⚠️ In Deutschland schreibt § 11 PAngV vor, dass sich eine Rabattangabe auf den
+> niedrigsten Preis der letzten 30 Tage bezieht. Ein rein rechnerisch angehobener
+> Vergleichspreis ist dort angreifbar – bitte vor dem Import prüfen.
+
+# Sprach- und Rechtschreibprüfung (463 Produkte)
+
+Geprüft mit deutschem Wörterbuch (`pyspellchecker`) plus Kompositazerlegung,
+Werkzeug: `_spell.py`.
+
+- **Titel:** 0 spanische Wörter. **Ein echter Tippfehler:**
+  `Gepolsterter Kissenbezug – Schneerefuug` → vermutlich *Schneerefugium*.
+- **Beschreibungen:** keine Rechtschreibfehler.
+- Nicht übersetzte englische Designnamen: *Holly Dreams, Serenity Blau,
+  Melanin Queens Glow, Blue Nautical, Turtle Dreams Coral, Tropical Sunrise*.
+- Spanischer Vorname `Ámbar` in einer Reisetasche.
+- Bettwäsche trägt fünf verschiedene Produktbezeichnungen für dasselbe Set.
+- Abschnittstitel `REISEKOFFER`, obwohl dort Reisetaschen stehen.
+- Anrede uneinheitlich: Theme-Texte siezen, Produkttexte duzen.
