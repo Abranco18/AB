@@ -251,3 +251,36 @@ und `Tags` („Mantelería“).
 ```
 python3 de/translate_titel_tischlaeufer.py <shop-export.csv> de/tischlaeufer_titel_DE.csv
 ```
+
+---
+
+# `loja_toda_DE.csv` – der komplette Shop auf Deutsch, ohne Duplikate
+
+Erzeugt mit `build_loja_toda_DE.py` aus dem vollständigen Shop-Export
+(660 Produkte). **305 Produkte / 931 Zeilen.** Die Datei verwendet
+ausschließlich **bestehende Handles** – ein Import aktualisiert die Produkte,
+er legt keine neuen an.
+
+| Teil | Produkte | Was geändert wird |
+|---|---|---|
+| Noch spanische Produkte | 197 | Titel, Beschreibung, Produkttyp, Tags, Optionsnamen und -werte + Preise +5 € |
+| Deutscher Text, englischer Optionsname | 108 | nur `Size`/`Style`/`Model` → `Größe`/`Stil`/`Modell`; Preise unverändert |
+
+## Warum es beim ersten Mal schiefging
+Die früheren Dateien (`products_export_DE.csv` usw.) trugen **deutsche
+Handles**. Der Handle ist in Shopify der Schlüssel: bei einem Import mit neuem
+Handle wird ein **neues Produkt angelegt**, das bestehende bleibt unverändert.
+So entstanden 197 deutsche Dubletten, während die spanischen Originale weiter
+im Shop standen – und da nur die Originale den Collections zugeordnet sind,
+zeigte die Storefront weiterhin Spanisch.
+
+`loja_toda_DE.csv` behält deshalb die Original-Handles bei.
+
+## Reihenfolge
+1. `loja_toda_DE.csv` importieren (Overwrite aktivieren)
+2. Die 197 deutschen Dubletten löschen – Liste in `APAGAR_duplicados_DE.csv`
+
+## Erneut ausführen
+```
+python3 de/build_loja_toda_DE.py <shop-export.csv> de/loja_toda_DE.csv
+```
