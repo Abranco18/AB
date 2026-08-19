@@ -227,3 +227,27 @@ Kälbchen, Highland-Blumen, Highland-Blüte, Highland-Abendrot).
 ```
 python3 de/translate_falta50_de.py <die-50-spanischen-zeilen.csv> de/restantes50_export_DE.csv
 ```
+
+---
+
+# `tischlaeufer_titel_DE.csv` – nur die Titel
+
+Erzeugt mit `translate_titel_tischlaeufer.py` aus dem Shop-Export der 39
+Tischläufer (124 Zeilen). **Es ist ausschließlich die Spalte `Title` geändert** –
+alle übrigen 58 Spalten sind Zeichen für Zeichen identisch mit dem Export.
+
+Wichtig: die **Handles bleiben die spanischen Originale**. Dadurch aktualisiert
+ein Import die bestehenden Produkte, statt neue anzulegen – anders als bei
+`tischlaeufer_export_DE.csv`, das deutsche Handles verwendet und deshalb
+Duplikate erzeugt hat.
+
+Die Motivnamen sind dieselben wie in `tischlaeufer_export_DE.csv`, damit die
+Benennung im Shop konsistent bleibt.
+
+Noch auf Spanisch in diesen Produkten: `Body (HTML)`, `Option1 Name` („Tamaño“)
+und `Tags` („Mantelería“).
+
+## Erneut ausführen
+```
+python3 de/translate_titel_tischlaeufer.py <shop-export.csv> de/tischlaeufer_titel_DE.csv
+```
